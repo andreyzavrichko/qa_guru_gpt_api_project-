@@ -40,4 +40,10 @@ public class Specs {
             .log(LogDetail.ALL)  // Логирование всех деталей ответа
             .expectResponseTime(Matchers.lessThan(3000L)) // Проверка времени выполнения запроса (менее 3 секунд)
             .build();
+
+    public static ResponseSpecification responseSpec500 = new ResponseSpecBuilder()
+            .expectStatusCode(500)
+            .log(LogDetail.ALL)  // Логирование всех деталей ответа
+            .expectResponseTime(Matchers.lessThan(3000L)) // Проверка времени выполнения запроса (менее 3 секунд)
+            .build();
 }

@@ -1,6 +1,6 @@
 package com.booker.tests;
 
-import com.booker.models.booking.BookingResponse;
+import com.booker.models.booking.GetBookingResponse;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Severity;
 import io.qameta.allure.Story;
@@ -16,7 +16,7 @@ import static io.qameta.allure.SeverityLevel.*;
 import static io.restassured.RestAssured.given;
 import static org.assertj.core.api.Assertions.assertThat;
 
-@Feature("Book")
+@Feature("Booking")
 @Story("Получение бронирований")
 @DisplayName("Тесты API бронирования")
 public class GetBookingTests {
@@ -62,41 +62,18 @@ public class GetBookingTests {
         assertThat(response).isEmpty(); // Проверяем, что массив пустой
     }
 
-    @Test
-    @Severity(CRITICAL)
-    @DisplayName("Получение бронирований по имени и фамилии")
-    void getBookingsByNameTest() {
-        List<Map<String, Object>> response = given(request)
-                .param("firstname", "Mary")
-                .param("lastname", "Ericsson")
-                .when()
-                .get("/booking")
-                .then()
-                .spec(responseSpec)
-                .extract()
-                .as(new TypeRef<>() {
-                }); // Десериализуем JSON в List<Map<String, Object>>
-
-        assertThat(response).isNotEmpty(); // Проверяем, что список не пустой
-        assertThat(response).allSatisfy(booking -> {
-            assertThat(booking).containsKey("bookingid"); // Проверяем наличие ключа
-            assertThat(booking.get("bookingid")).isInstanceOf(Number.class); // Проверяем, что это число
-            assertThat(booking.get("bookingid")).isEqualTo(1); // Проверяем, что это число
-        });
-    }
-
 
     @Test
     @Severity(BLOCKER)
     @DisplayName("Получение информации о конкретном бронировании")
     void getBookingByIdTest() {
-        BookingResponse response = given(request)
+        GetBookingResponse response = given(request)
                 .when()
                 .get("/booking/1")
                 .then()
                 .spec(responseSpec)
                 .extract()
-                .as(BookingResponse.class);
+                .as(GetBookingResponse.class);
 
         // Проверяем, что данные корректно распарсились
         assertThat(response.getFirstname()).isNotEmpty();

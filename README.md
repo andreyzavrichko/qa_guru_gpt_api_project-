@@ -68,7 +68,7 @@
 gradle clean test
 ```
 ## Запуск автотестов выполняется на сервере Jenkins
-> <a target="_blank" href="https://jenkins.autotests.cloud/job/10-azavrichko-diplom_api/">Ссылка на проект в Jenkins</a>
+> <a target="_blank" href="https://jenkins.autotests.cloud/job/chatgpt06_zavrichko_api/">Ссылка на проект в Jenkins</a>
 
 ![This is an image](/design/images/jenkins.png)
 

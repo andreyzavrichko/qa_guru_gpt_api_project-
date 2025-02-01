@@ -14,7 +14,7 @@ public class GetBookingResponse {
     private String additionalneeds;
 
     @Data
-    public static class Bookingdates{
+    public static class Bookingdates {
         private String checkin;
         private String checkout;
     }

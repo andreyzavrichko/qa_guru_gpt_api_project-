@@ -12,7 +12,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static com.booker.spec.Specs.*;
+import static com.booker.spec.Specs.request;
+import static com.booker.spec.Specs.responseSpec;
 import static io.qameta.allure.SeverityLevel.BLOCKER;
 import static io.restassured.RestAssured.given;
 import static org.junit.jupiter.api.Assertions.*;
@@ -23,7 +24,6 @@ import static org.junit.jupiter.api.Assertions.*;
 public class PostBookingTests {
     Faker faker = new Faker();
 
-    // Данные для создания бронирования
     BookingRequest validBooking = BookingRequest.builder()
             .firstname(faker.name().firstName())
             .lastname(faker.name().lastName())
@@ -36,7 +36,6 @@ public class PostBookingTests {
             .additionalneeds(faker.food().fruit())
             .build();
 
-    // Инициализируем помощника, который использует заданные спецификации
     BookingHelper bookingHelper = new BookingHelper(request, responseSpec);
     PostBookingResponse response;
 
@@ -44,16 +43,11 @@ public class PostBookingTests {
     @Severity(BLOCKER)
     @DisplayName("Создание бронирования")
     void postBookingsTest() {
-        // Создаем бронирование с помощью помощника и получаем bookingId
         Integer bookingId = bookingHelper.createBooking(validBooking);
 
-        // Проверяем, что bookingId валидный
         assertNotNull(bookingId, "Поле bookingid должно быть не null");
         assertTrue(bookingId > 0, "Поле bookingid должно быть больше 0");
 
-        // Выполняем GET-запрос для получения данных созданного бронирования
-
-        // Извлекаем объект бронирования из ответа
         GetBookingResponse bookingResponse = given(request)
                 .when()
                 .get("/booking/" + bookingId)
@@ -63,7 +57,6 @@ public class PostBookingTests {
                 .as(GetBookingResponse.class);
 
 
-        // Сравниваем поля отправленного запроса и полученного ответа
         assertEquals(validBooking.getFirstname(), bookingResponse.getFirstname(), "firstname не совпадает");
         assertEquals(validBooking.getLastname(), bookingResponse.getLastname(), "lastname не совпадает");
         assertEquals(validBooking.getTotalprice(), bookingResponse.getTotalprice(), "totalprice не совпадает");

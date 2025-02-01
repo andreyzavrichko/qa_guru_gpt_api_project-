@@ -18,18 +18,15 @@ import static io.qameta.allure.SeverityLevel.BLOCKER;
 @Story("Удаление бронирования")
 @DisplayName("Тесты API удаления бронирования")
 public class DeleteBookingTests {
-
-
     private BookingHelper bookingHelper;
     private Integer bookingId;
     private BookingRequest validBooking;
 
     @BeforeEach
+    @DisplayName("Создание бронирования")
     void setUp() {
-        // Инициализируем помощника
         bookingHelper = new BookingHelper(request, responseSpec);
 
-        // Создаем данные бронирования с использованием Faker
         Faker faker = new Faker();
         validBooking = BookingRequest.builder()
                 .firstname(faker.name().firstName())
@@ -43,7 +40,6 @@ public class DeleteBookingTests {
                 .additionalneeds(faker.food().fruit())
                 .build();
 
-        // Создаем бронирование и сохраняем bookingId
         bookingId = bookingHelper.createBooking(validBooking);
     }
 

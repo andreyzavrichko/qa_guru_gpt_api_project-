@@ -14,6 +14,9 @@ import static io.qameta.allure.SeverityLevel.*;
 import static io.restassured.RestAssured.given;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.equalTo;
+
+@Feature("Login")
+@Story("Auth")
 @DisplayName("Авторизация")
 public class AuthApiTests {
     AuthRequest validAuth = AuthRequest.builder()
@@ -35,8 +38,6 @@ public class AuthApiTests {
             .build();
 
     @Test
-    @Feature("Login")
-    @Story("Auth")
     @DisplayName("Проверка успешного получения токена")
     @Severity(BLOCKER)
     void authSuccessTest() {
@@ -53,8 +54,6 @@ public class AuthApiTests {
     }
 
     @Test
-    @Feature("Login")
-    @Story("Auth")
     @DisplayName("Проверка получения токена без username")
     @Severity(NORMAL)
     void authWithoutUsernameTest() {
@@ -69,8 +68,6 @@ public class AuthApiTests {
     }
 
     @Test
-    @Feature("Login")
-    @Story("Auth")
     @DisplayName("Проверка получения токена без password")
     @Severity(NORMAL)
     void authWithoutPasswordTest() {
@@ -84,8 +81,6 @@ public class AuthApiTests {
     }
 
     @Test
-    @Feature("Login")
-    @Story("Auth")
     @DisplayName("Проверка получения токена несуществующим пользователем")
     @Severity(MINOR)
     void authUserNotFoundTest() {

@@ -17,7 +17,7 @@ public class BookingRequest {
 
     @Data
     @Builder
-    public static class Bookingdates{
+    public static class Bookingdates {
         private String checkin;
         private String checkout;
     }

@@ -8,8 +8,6 @@ import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 import lombok.Getter;
 
-import java.util.Map;
-
 import static com.booker.spec.Specs.responseSpec201;
 import static io.restassured.RestAssured.given;
 

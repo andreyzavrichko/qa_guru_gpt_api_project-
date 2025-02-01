@@ -3,7 +3,6 @@ package com.booker.tests;
 import com.booker.helpers.BookingHelper;
 import com.booker.models.booking.BookingRequest;
 import com.booker.models.booking.GetBookingResponse;
-import com.booker.models.booking.PostBookingResponse;
 import com.github.javafaker.Faker;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Severity;
@@ -28,11 +27,10 @@ public class PutBookingTests {
     private BookingRequest validBooking;
 
     @BeforeEach
+    @DisplayName("Создание бронирования")
     void setUp() {
-        // Инициализируем помощника
         bookingHelper = new BookingHelper(request, responseSpec);
 
-        // Создаем данные бронирования с использованием Faker
         Faker faker = new Faker();
         validBooking = BookingRequest.builder()
                 .firstname(faker.name().firstName())
@@ -46,7 +44,6 @@ public class PutBookingTests {
                 .additionalneeds(faker.food().fruit())
                 .build();
 
-        // Создаем бронирование и сохраняем bookingId
         bookingId = bookingHelper.createBooking(validBooking);
     }
 
@@ -54,7 +51,6 @@ public class PutBookingTests {
     @Severity(BLOCKER)
     @DisplayName("Обновление бронирования")
     void updateBookingTest() {
-        // Создаем новые данные для обновления
         Faker faker = new Faker();
         BookingRequest updatedBooking = BookingRequest.builder()
                 .firstname(faker.name().firstName())
@@ -68,10 +64,8 @@ public class PutBookingTests {
                 .additionalneeds(faker.food().ingredient())
                 .build();
 
-        // Выполняем обновление бронирования
         GetBookingResponse updateResponse = bookingHelper.updateBooking(updatedBooking);
 
-        // Сравниваем, что поля обновились согласно отправленным данным
         assertEquals(updatedBooking.getFirstname(), updateResponse.getFirstname(), "firstname не совпадает");
         assertEquals(updatedBooking.getLastname(), updateResponse.getLastname(), "lastname не совпадает");
         assertEquals(updatedBooking.getTotalprice(), updateResponse.getTotalprice(), "totalprice не совпадает");

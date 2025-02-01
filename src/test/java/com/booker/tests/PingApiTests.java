@@ -11,11 +11,12 @@ import static com.booker.spec.Specs.responseSpec201;
 import static io.qameta.allure.SeverityLevel.BLOCKER;
 import static io.restassured.RestAssured.given;
 
+@Feature("Ping")
+@Story("Ping")
 @DisplayName("Доступность сервиса")
 public class PingApiTests {
+
     @Test
-    @Feature("Ping")
-    @Story("Ping")
     @DisplayName("Проверка доступности сервиса")
     @Severity(BLOCKER)
     void statusAvailableTest() {
